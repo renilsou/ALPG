@@ -1,4 +1,4 @@
-movimentacao = []
+movimentacoes = []
 saldo = 0
 
 def exibirMenu():
@@ -12,7 +12,6 @@ def exibirMenu():
 def validarValor(valor):
     if valor <= 0: return False 
     else: return True
-    
 
 def exibirSaldo():
     print(f"SALDO ATUAL: R$ {saldo:.2f}")
@@ -24,7 +23,7 @@ def depositarValor():
         print(f"\nO VALOR DE R$ {deposito:.2f} FOI DEPOSITADO EM SUA CONTA.\n")
         saldo += deposito
         exibirSaldo()
-        movimentacao.append(deposito)
+        movimentacoes.append(deposito)
     else:
         print("VALOR INVÁLIDO PARA DEPÓSITO!")
 
@@ -35,13 +34,13 @@ def sacarValor():
         print(f"O VALOR DE R$ {saque:.2f} FOI SACADO DE SUA CONTA.")
         saldo -= saque
         exibirSaldo()
-        movimentacao.append(-saque)
+        movimentacoes.append(-saque)
     else:
         print("VALOR INVÁLIDO PARA SAQUE!")
 
-def exibirMovimentacao():
+def exibirmovimentacoes():
     print("\nEXTRATO:")
-    for movimento in movimentacao:
+    for movimento in movimentacoes:
         print(movimento)
     exibirSaldo()
     print("\n")
@@ -52,7 +51,6 @@ while True:
     opcao = int(input("INFORME A OPÇÃO: "))
 
     match opcao:
-
         case 1:
             exibirSaldo()
         case 2:
@@ -60,7 +58,7 @@ while True:
         case 3:
             sacarValor()
         case 4:
-            exibirMovimentacao()
+            exibirmovimentacoes()
         case 5:
             break
         case _:

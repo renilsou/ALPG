@@ -43,7 +43,6 @@ def mostrarChutes():
     print(f"\nSeu(s) chute(s) foi(ram): {chutes} e o número era {numero}.")
 
 while True:
-
     numero = random.randint(1,100)
     chutes = []
 
