@@ -1,5 +1,5 @@
 movimentacao = []
-saldoAtual = 0
+saldo = 0
 
 def exibirMenu():
     print('''=== SELECIONE UMA DAS OPÇÕES ABAIXO: ===
@@ -10,37 +10,41 @@ def exibirMenu():
 [5] - SAIR''')
 
 def validarValor(valor):
-    if valor <= 0:
-        return False
-    return True
+    if valor <= 0: return False 
+    else: return True
     
-def exibirSaldo(saldo):
+
+def exibirSaldo():
     print(f"SALDO ATUAL: R$ {saldo:.2f}")
     
-def depositarValor(saldo):
+def depositarValor():
+    global saldo
     deposito = float(input("INFORME O VALOR A SER DEPOSITADO:"))
     if validarValor(deposito):
         print(f"\nO VALOR DE R$ {deposito:.2f} FOI DEPOSITADO EM SUA CONTA.\n")
         saldo += deposito
-        exibirSaldo(saldo)
+        exibirSaldo()
         movimentacao.append(deposito)
     else:
         print("VALOR INVÁLIDO PARA DEPÓSITO!")
 
-def sacarValor(saldo):
+def sacarValor():
+    global saldo
     saque = float(input("INFORME O VALOR A SER SACADO: "))
     if validarValor(saque):
         print(f"O VALOR DE R$ {saque:.2f} FOI SACADO DE SUA CONTA.")
         saldo -= saque
-        exibirSaldo(saldo)
+        exibirSaldo()
         movimentacao.append(-saque)
     else:
         print("VALOR INVÁLIDO PARA SAQUE!")
 
-def exibirMovimentacao(saldo):
+def exibirMovimentacao():
+    print("\nEXTRATO:")
     for movimento in movimentacao:
         print(movimento)
-    exibirSaldo(saldo)
+    exibirSaldo()
+    print("\n")
 
 while True:
     exibirMenu()
@@ -50,13 +54,13 @@ while True:
     match opcao:
 
         case 1:
-            exibirSaldo(saldoAtual)
+            exibirSaldo()
         case 2:
-            depositarValor(saldoAtual)
+            depositarValor()
         case 3:
-            sacarValor(saldoAtual)
+            sacarValor()
         case 4:
-            exibirMovimentacao(saldoAtual)
+            exibirMovimentacao()
         case 5:
             break
         case _:

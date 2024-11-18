@@ -1,7 +1,7 @@
 import random
 
 def exibirMenu():
-    print('''=== SELECIONE UMA DAS OPÇÕES ABAIXO: ===
+    print('''\n=== SELECIONE UMA DAS OPÇÕES ABAIXO: ===
 [1] - Sete Chutes
 [2] - Cinco Chutes
 [3] - Três Chutes
@@ -9,34 +9,42 @@ def exibirMenu():
     
 def solicitarChute(nChutes):
     for i in range(0,nChutes):
-        chute = int(input(f"Chute {i+1}: "))
-        validarChute(chute)
+        chute = int(input(f"\nChute {i+1}: "))
+        if validarChute(chute):
+            break
+    mostrarChutes()
 
 def validarChute(chute):
-    if (chute < 1 or chute > 100):
+    while (chute < 1 or chute > 100):
         print("Chute dado está fora do intervalo de 1 a 100.")
+        chute = int(input(f"Chute novamente: "))
     
-    for item in chutes:
-        if chute == item:
+    while chute in chutes:
             print("Você já chutou esse número.")
+            chute = int(input(f"Chute novamente: "))
     
     if chute == numero:
         print("Você acertou!")
-        print(f"Quantidade de chutes: {len(chutes)}")
         chutes.append(chute)
-    
+        print(f"Quantidade de chutes: {len(chutes)}")
+        return True
+       
     if (chute < numero and chute > 0):
         print("Você errou! Chute foi menor que o número secreto!")
         chutes.append(chute)
+        return False
 
     if (chute > numero and chute < 100):
         print("Você errou! Chute foi maior que o número secreto!")
         chutes.append(chute)
+        return False
+
+def mostrarChutes():
+    print(f"\nSeu(s) chute(s) foi(ram): {chutes} e o número era {numero}.")
 
 while True:
 
     numero = random.randint(1,100)
-    print(numero)
     chutes = []
 
     exibirMenu()
